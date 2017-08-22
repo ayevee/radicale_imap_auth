@@ -5,13 +5,19 @@ Install the python module by running the following command in the same folder as
 python3 -m pip install --upgrade .
 ```
 
-To make use this great creation in Radicale, set the configuration option type in the auth section to radicale_silly_auth:
-
+To use IMAP authentication in radicale adjust `auth` section in radicale config:
 ```ini
 [auth]
 type = radicale_imap_auth
-foo = bar
+imap_hostname = example.com
+imap_port = 993
+imap_ssl = True
 ```
+Default values:
+
+* `imap_hostname`: `localhost`
+* `imap_port`: `143`
+* `imap_ssl`: `False`
 
 You can uninstall this module with:
 ```shell
