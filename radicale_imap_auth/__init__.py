@@ -22,7 +22,7 @@ class Auth(BaseAuth):
         if self.configuration.has_option("auth", "imap_ssl"):
             IMAP_USE_SSL = self.configuration.getboolean("auth", "imap_ssl")
 
-        log.LOGGER.debug(
+        self.logger.debug(
                 "Connecting to IMAP server %s:%s." % (IMAP_SERVER, IMAP_SERVER_PORT,))
 
         connection_is_secure = False
@@ -38,19 +38,19 @@ class Auth(BaseAuth):
         if not connection_is_secure:
             try:
                 connection.starttls()
-                log.LOGGER.debug("IMAP server connection changed to TLS.")
+                self.logger.debug("IMAP server connection changed to TLS.")
                 connection_is_secure = True
             except AttributeError:
                 if not server_is_local:
-                    log.LOGGER.error(
+                    self.logger.error(
                         "Python 3.2 or newer is required for IMAP + TLS.")
             except (imaplib.IMAP4.error, imaplib.IMAP4.abort) as exception:
-                log.LOGGER.warning(
+                self.logger.warning(
                     "IMAP server at %s failed to accept TLS connection "
                     "because of: %s" % (IMAP_SERVER, exception))
 
         if server_is_local and not connection_is_secure:
-            log.LOGGER.info(
+            self.logger.info(
                 "IMAP server is local. "
                 "Will allow transmitting unencrypted credentials.")
 
@@ -58,16 +58,16 @@ class Auth(BaseAuth):
             try:
                 connection.login(user, password)
                 connection.logout()
-                log.LOGGER.debug(
+                self.logger.debug(
                     "Authenticated IMAP user %s "
                     "via %s." % (user, IMAP_SERVER))
                 return True
             except (imaplib.IMAP4.error, imaplib.IMAP4.abort) as exception:
-                log.LOGGER.error(
+                self.logger.error(
                     "IMAP server could not authenticate user %s "
                     "because of: %s" % (user, exception))
         else:
-            log.LOGGER.critical(
+            self.logger.critical(
                 "IMAP server did not support TLS and is not ``localhost``. "
                 "Refusing to transmit passwords under these conditions. "
                 "Authentication attempt aborted.")
