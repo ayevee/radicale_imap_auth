@@ -2,4 +2,4 @@
 
 from distutils.core import setup
 
-setup(name="radicale_silly_auth", packages=["radicale_silly_auth"])
+setup(name="radicale_imap_auth", packages=["radicale_imap_auth"])
