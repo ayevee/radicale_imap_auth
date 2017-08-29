@@ -2,6 +2,7 @@ import imaplib
 
 from radicale.auth import BaseAuth
 
+VERSION = "1.0.0"
 
 class Auth(BaseAuth):
     def is_authenticated(self, user, password):
