@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+import os
+import re
+
 from distutils.core import setup
 
 init_path = os.path.join(os.path.dirname(__file__),
