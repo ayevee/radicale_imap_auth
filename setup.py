@@ -6,7 +6,7 @@ import re
 from distutils.core import setup
 
 init_path = os.path.join(os.path.dirname(__file__),
-                         "radicale_infcloud", "__init__.py")
+                         "radicale_imap_auth", "__init__.py")
 with open(init_path) as f:
     version = re.search(r'VERSION = "([^"]+)"', f.read()).group(1)
 
